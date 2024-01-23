@@ -19,9 +19,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 //dddss
 export default function Header({
+  startLink,
   pages,
   isAdmin,
 }: {
+  startLink:string;
   pages: string[];
   isAdmin: boolean;
 }) {
@@ -43,7 +45,7 @@ export default function Header({
     dispatch<any>(signOut());
     setAnchorElNav(null);
     dispatch(resetUser());
-    navigate('/flights');
+    navigate(startLink);
   };
 
 
@@ -60,7 +62,7 @@ export default function Header({
             variant="h6"
             noWrap
             component="a"
-            href="/flights"
+            href={startLink}
             sx={{
               mr: 2,
               fontFamily: 'monospace',
