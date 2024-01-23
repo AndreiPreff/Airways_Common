@@ -10,20 +10,19 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { getUserProfile, signOut } from 'app/auth/store/auth.actions';
-import { userProfileSelector } from 'app/auth/store/auth.selectors';
-import { resetUser } from 'app/auth/store/auth.slice';
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { userProfileSelector } from './auth/store/auth.selectors';
+import { getUserProfile, signOut } from './auth/store/auth.actions';
+import { resetUser } from './auth/store/auth.slice';
 
 //dddss
 export default function Header({
-  startLink,
   pages,
   isAdmin,
 }: {
-  startLink:string;
   pages: string[];
   isAdmin: boolean;
 }) {
@@ -45,7 +44,7 @@ export default function Header({
     dispatch<any>(signOut());
     setAnchorElNav(null);
     dispatch(resetUser());
-    navigate(startLink);
+    navigate('/flights');
   };
 
 
@@ -62,7 +61,7 @@ export default function Header({
             variant="h6"
             noWrap
             component="a"
-            href={startLink}
+            href="/flights"
             sx={{
               mr: 2,
               fontFamily: 'monospace',

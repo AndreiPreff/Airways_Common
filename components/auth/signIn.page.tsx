@@ -26,8 +26,7 @@ const SignIn = () => {
 
   const signInUser = async (values: FieldValues) => {
     const response = await dispatch<any>(signIn(values));
-    if (response.payload.role === 'USER') navigation("/flights");
-    if (response.payload.role === 'ADMIN') navigation("/admin");
+    if (response.meta.requestStatus === 'fulfilled') navigation("/user");
   };
 
   const submitForm: SubmitHandler<FieldValues> = (data) => {

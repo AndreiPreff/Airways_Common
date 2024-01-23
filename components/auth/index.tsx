@@ -1,6 +1,7 @@
 import React from "react";
 import AuthenticationRoutes from "./auth.routes";
-import Header from "components/header";
+import Header from "../header";
+
 
 const SignPage: React.FC = () => {
   return (
