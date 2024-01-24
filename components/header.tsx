@@ -1,4 +1,4 @@
-import AirplanemodeActiveIcon from '@mui/icons-material/AirplanemodeActive';
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import {
   AppBar,
   Box,
@@ -9,26 +9,25 @@ import {
   MenuItem,
   Toolbar,
   Typography,
-} from '@mui/material';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { userProfileSelector } from './auth/store/auth.selectors';
-import { getUserProfile, signOut } from './auth/store/auth.actions';
-import { resetUser } from './auth/store/auth.slice';
+} from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getUserProfile, signOut } from "./auth/store/auth.actions";
+import { userProfileSelector } from "./auth/store/auth.selectors";
+import { resetUser } from "./auth/store/auth.slice";
 
-export default function Header({
-  isAdmin,
-}: {
-  isAdmin: boolean;
-}) {
+export default function Header({ isAdmin }: { isAdmin: boolean }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
   const userInfo = useSelector(userProfileSelector);
-  const startLink = isAdmin ? '/admin' : '/flights';
-  const pagesLink = isAdmin?['admin/users','manager/chat','/flights']:['Orders', 'Orders/History'];
-
+  const startLink = isAdmin ? "admin" : " flights";
+  const pagesLink = isAdmin
+    ? ["admin/users", "manager/chat", "flights"]
+    : ["Orders", "Orders/History"];
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -45,11 +44,9 @@ export default function Header({
     navigate(startLink);
   };
 
-
   useEffect(() => {
     dispatch<any>(getUserProfile());
   }, [dispatch]);
-
 
   return (
     <AppBar position="static">
@@ -62,43 +59,47 @@ export default function Header({
             href={startLink}
             sx={{
               mr: 2,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             AIRWAYS
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+          <Box
+            sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
+          >
             {userInfo ? (
-              <> <Typography
-                variant="h6"
-                noWrap
-                sx={{
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                  marginLeft: 'auto',
-                }}
-              >
-                Hi,{userInfo.first_name}
-              </Typography>
+              <>
+                {" "}
+                <Typography
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    color: "inherit",
+                    textDecoration: "none",
+                    marginLeft: "auto",
+                  }}
+                >
+                  Hi,{userInfo.first_name}
+                </Typography>
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorElNav}
                   anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
+                    vertical: "bottom",
+                    horizontal: "right",
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
+                    vertical: "top",
+                    horizontal: "right",
                   }}
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
@@ -112,7 +113,7 @@ export default function Header({
                         component={NavLink}
                         to={`/${page.toLowerCase()}`}
                         sx={{
-                          textDecoration: 'none',
+                          textDecoration: "none",
                         }}
                       >
                         {page}
@@ -132,20 +133,32 @@ export default function Header({
                   aria-haspopup="true"
                   onClick={handleOpenNavMenu}
                   color="inherit"
-                  sx={{ marginLeft: 'auto' }}
+                  sx={{ marginLeft: "auto" }}
                 >
                   <AirplanemodeActiveIcon />
                 </IconButton>
               </>
             ) : (
               <>
-                <NavLink className="link" to="/auth/sign-in" style={{ textDecoration: 'none' }}>
-                  <Typography variant="h6" component="div" color="white" sx={{ marginLeft: '5px' }}>
+                <NavLink
+                  className="link"
+                  to="/auth/sign-in"
+                  style={{ textDecoration: "none" }}
+                >
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    color="white"
+                    sx={{ marginLeft: "5px" }}
+                  >
                     Login
                   </Typography>
                 </NavLink>
                 {!isAdmin && (
-                  <NavLink to="/auth/sign-up" style={{ textDecoration: 'none', marginLeft: '5px' }}>
+                  <NavLink
+                    to="/auth/sign-up"
+                    style={{ textDecoration: "none", marginLeft: "5px" }}
+                  >
                     <Typography variant="h6" component="div" color="white">
                       Registration
                     </Typography>
