@@ -28,6 +28,7 @@ const SignIn = () => {
     const response = await dispatch<any>(signIn(values));
     if (response.payload.role === 'USER') navigation("/flights");
     if (response.payload.role === 'ADMIN') navigation("/admin");
+    if (response.payload.role === 'MANAGER') navigation("/flights");
   };
 
   const submitForm: SubmitHandler<FieldValues> = (data) => {

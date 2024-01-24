@@ -27,7 +27,7 @@ export default function Header({
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const userInfo = useSelector(userProfileSelector);
   const startLink = isAdmin ? '/admin' : '/flights';
-  const pagesLink = isAdmin?['admin/users','manager/chat','manager/flights']:['Orders', 'Orders/History'];
+  const pagesLink = isAdmin?['admin/users','manager/chat','/flights']:['Orders', 'Orders/History'];
 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
