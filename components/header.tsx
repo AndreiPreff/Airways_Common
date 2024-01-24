@@ -10,7 +10,6 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -18,18 +17,17 @@ import { userProfileSelector } from './auth/store/auth.selectors';
 import { getUserProfile, signOut } from './auth/store/auth.actions';
 import { resetUser } from './auth/store/auth.slice';
 
-//dddss
 export default function Header({
-  pages,
   isAdmin,
 }: {
-  pages: string[];
   isAdmin: boolean;
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const userInfo = useSelector(userProfileSelector);
+  const startLink = isAdmin ? '/admin' : '/flights';
+  const pagesLink = isAdmin?['admin/users','manager/chat','manager/flights']:['Orders', 'Orders/History'];
 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -44,13 +42,13 @@ export default function Header({
     dispatch<any>(signOut());
     setAnchorElNav(null);
     dispatch(resetUser());
-    navigate('/flights');
+    navigate(startLink);
   };
 
 
   useEffect(() => {
     dispatch<any>(getUserProfile());
-}, [dispatch]);
+  }, [dispatch]);
 
 
   return (
@@ -61,7 +59,7 @@ export default function Header({
             variant="h6"
             noWrap
             component="a"
-            href="/flights"
+            href={startLink}
             sx={{
               mr: 2,
               fontFamily: 'monospace',
@@ -105,7 +103,7 @@ export default function Header({
                   open={Boolean(anchorElNav)}
                   onClose={handleCloseNavMenu}
                 >
-                  {pages.map((page) => (
+                  {pagesLink.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                       <Typography
                         variant="h6"
